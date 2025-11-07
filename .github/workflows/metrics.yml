@@ -30,12 +30,12 @@ jobs:
           plugin_isocalendar: yes
           plugin_isocalendar_duration: half-year
           plugin_languages: yes
-          plugin_languages_aliases: Python, Rust, C, C++, Jupyter Notebook
+          plugin_languages_aliases: Python, Rust, C, C++, Go
           plugin_languages_colors: github
-          plugin_languages_ignored: JavaScript, CSS, HTML
+          plugin_languages_ignored:  Jupyter Notebook, JavaScript, CSS, HTML
           plugin_languages_limit: 4
           plugin_languages_threshold: 0%
           plugin_lines: yes
+          plugin_lines_sections: base
           plugin_lines_history_limit: 1
           plugin_lines_repositories_limit: 4
-          plugin_lines_sections: base
