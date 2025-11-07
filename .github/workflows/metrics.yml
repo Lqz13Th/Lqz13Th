@@ -1,33 +1,40 @@
-name: Generate GitHub Metrics
+name: Metrics
 
 on:
-  schedule: [{cron: "0 */12 * * *"}]
+  schedule: [{ cron: "0 */12 * * *" }]
   workflow_dispatch:
+  push: { branches: ["main"] }
 
 jobs:
-  generate-metrics:
+  github-metrics:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: lowlighter/metrics@latest
         with:
-          node-version: "18"
-
-      - name: Generate GitHub Metrics
-        uses: kugaichen/github-metrics@v1
-        with:
-          github_token: ${{ secrets.GH_TOKEN }}
-          username: Lqz13Th
-          theme: transparent
-          show_icons: true
-          hide_title: false
-          include_3d: true
-          show_tech_stack: true
-
-      - name: Commit SVG
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add github-metrics.svg
-          git commit -m "Update github-metrics.svg [Skip GitHub Action]" || echo "No changes to commit"
-          git push
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: Lqz13Th
+          template: classic
+          base: header, activity, community, repositories, metadata
+          config_display: large
+          config_timezone: Asia/Shanghai
+          plugin_habits: yes
+          plugin_habits_charts_type: classic
+          plugin_habits_days: 14
+          plugin_habits_facts: yes
+          plugin_habits_from: 200
+          plugin_habits_languages_limit: 4
+          plugin_habits_languages_threshold: 0%
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: half-year
+          plugin_languages: yes
+          plugin_languages_aliases: Verilog, Python, C, C++
+          plugin_languages_colors: github
+          plugin_languages_ignored: JavaScript, CSS, HTML
+          plugin_languages_limit: 4
+          plugin_languages_threshold: 0%
+          plugin_lines: yes
+          plugin_lines_history_limit: 1
+          plugin_lines_repositories_limit: 4
+          plugin_lines_sections: base
