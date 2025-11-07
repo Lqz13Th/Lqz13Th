@@ -9,7 +9,8 @@ jobs:
   github-metrics:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+      actions: read
     steps:
       - uses: lowlighter/metrics@latest
         with:
@@ -19,7 +20,7 @@ jobs:
           base: header, activity, community, repositories, metadata
           config_display: large
           config_timezone: Asia/Shanghai
-          plugin_habits: no
+          plugin_habits: yes
           plugin_habits_charts_type: classic
           plugin_habits_days: 14
           plugin_habits_facts: yes
