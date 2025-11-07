@@ -29,7 +29,7 @@ jobs:
           plugin_isocalendar: yes
           plugin_isocalendar_duration: half-year
           plugin_languages: yes
-          plugin_languages_aliases: Verilog, Python, C, C++
+          plugin_languages_aliases: Python, Rust, C, C++, Jupyter Notebook
           plugin_languages_colors: github
           plugin_languages_ignored: JavaScript, CSS, HTML
           plugin_languages_limit: 4
