@@ -5,11 +5,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  metrics:
+  generate-metrics:
     runs-on: ubuntu-latest
     steps:
-      - uses: lowlighter/metrics@latest
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          token: ${{ secrets.METRICS_TOKEN }}
-          base: header, activity, community, repositories, metadata
-          config_timezone: Asia/Shanghai
+          node-version: "18"
+
+      - name: Generate GitHub Metrics
+        uses: kugaichen/github-metrics@v1
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          username: Lqz13Th
+          theme: transparent
+          show_icons: true
+          hide_title: false
+          include_3d: true
+          show_tech_stack: true
+
+      - name: Commit SVG
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add github-metrics.svg
+          git commit -m "Update github-metrics.svg [Skip GitHub Action]" || echo "No changes to commit"
+          git push
